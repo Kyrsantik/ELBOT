@@ -116,11 +116,11 @@ def read_sqlite_table(records):
         cursor.execute(sqlite_select_query)
         records = cursor.fetchall()
 
-        for row in records:
-            print("Номер пары:", row[0],"название", row[1],"препод:", row[2],"кабинет:", row[3],)
-            """print("название", row[1])
-            print("препод:", row[2])
-            print("кабинет:", row[3], )"""
+        #for row in records:
+          #  print("Номер пары:", row[0],"название", row[1],"препод:", row[2],"кабинет:", row[3],)
+          #  """print("название", row[1])
+           # print("препод:", row[2])
+           # print("кабинет:", row[3], )"""
 
 
         cursor.close()
