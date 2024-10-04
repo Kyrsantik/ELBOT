@@ -1,3 +1,5 @@
+from email.message import Message
+from time import process_time_ns
 
 import telebot
 from telebot import types
@@ -20,13 +22,11 @@ def start1(message):
     bot.send_message(message.chat.id, text="Привет, {0.first_name}! Я тестовый бот расписания".format(message.from_user), reply_markup=markup)
 
 
-@bot.message_handler(commands=['start'])
-def start1(message):
-	bot.send_message(message.chat.id, text="Выбор недели", )
 
 
 
 @bot.message_handler(content_types=['text'])
+#@bot.message_handler(func=lambda message: message.text == "Нечетная")
 def send_hi(message):
 	if (message.text == "Нечетная"):
 		bot.send_message(message.chat.id, text="Выбирай день")
@@ -38,7 +38,9 @@ def send_hi(message):
 		btn5 = types.KeyboardButton("Пятница")
 		back = types.KeyboardButton("Назад")
 		markup.add(btn1, btn2, btn3,btn4,btn5,back)
-		bot.send_message(message.chat.id,text="None",reply_markup=markup)
+		bot.send_message(message.chat.id,text=" ахахааах",reply_markup=markup)
+
+
 
 	elif  (message.text == "Понедельник"):
 		conn = sqlite3.connect('nemmy_database.db')
@@ -113,33 +115,50 @@ def send_hi(message):
 		button2 = types.KeyboardButton("Нечетная")
 		markup.add(button1, button2)
 		bot.send_message(message.chat.id, text="Вы вернулись в главное меню", reply_markup=markup)
+
+
+
+
 	else:
-		bot.send_message(message.chat.id, text="На такую комманду я не запрограммировал..")
+		s1end_hi1(message)
 
+#@bot.message_handler(content_types=['text'])
+@bot.message_handler(content_types=['text'])
+def s1end_hi1(message):
+	if (message.text == "Четная"):
+		bot.send_message(message.chat.id, text="1Выбирай день1")
+		markup = types.ReplyKeyboardMarkup(resize_keyboard=True)
+		btn11 = types.KeyboardButton("Понедельник")
+		btn22 = types.KeyboardButton("Вторник")
+		btn33 = types.KeyboardButton("Среда")
+		btn44 = types.KeyboardButton("Четверг")
+		btn55 = types.KeyboardButton("Пятница")
+		back1 = types.KeyboardButton("Назад")
+		markup.add(btn11, btn22, btn33,btn44,btn55,back1)
+		bot.send_message(message.chat.id,text="None",reply_markup=markup)
+		bot.send_message(message.chat.id, text="ffffff", reply_markup=markup)
 
-def init_db():
-    conn = sqlite3.connect('my_database.db')
-    cursor = conn.cursor()
-def init_db2():
-	conn = sqlite3.connect('nemmy_database.db')
-	cursor = conn.cursor()
+		@bot.message_handler(content_types=['text'])
+		def gg_gg(message):
+			if (message.text == "Понедельник"):
+				conn = sqlite3.connect('my_database.db')
+				cursor = conn.cursor()
+
+				cursor.execute("SELECT * FROM Понедельник")
+				rows = cursor.fetchall()
+
+				response = "Понедельник:\n\n"
+				for row in rows:
+					response += f"Пара: {row[0]},  {row[1]},  {row[2]}, {row[3]}\n"
+
+				conn.close()
+				bot.send_message(message.chat.id, response)
+
 
 
 @bot.message_handler(content_types=['text'])
-def func1(message):
-	if (message.text == "Четная"):
-		bot.send_message(message.chat.id, text="Выбирай день")
-		markup = types.ReplyKeyboardMarkup(resize_keyboard=True)
-		btn1 = types.KeyboardButton("Понедельник")
-		btn2 = types.KeyboardButton("Вторник")
-		btn3 = types.KeyboardButton("Среда")
-		btn4 = types.KeyboardButton("Четверг")
-		btn5 = types.KeyboardButton("Пятница")
-		back = types.KeyboardButton("Назад")
-		markup.add(btn1, btn2, btn3,btn4,btn5,back)
-		bot.send_message(message.chat.id,text="None",reply_markup=markup)
-
-	elif (message.text == "Понедельник"):
+def gg_gg(message):
+	if (message.text == "Понедельник"):
 		conn = sqlite3.connect('my_database.db')
 		cursor = conn.cursor()
 
@@ -206,17 +225,29 @@ def func1(message):
 		conn.close()
 		bot.send_message(message.chat.id, response)
 
+
 	elif (message.text == "Назад"):
+
 		markup = types.ReplyKeyboardMarkup(resize_keyboard=True)
+
 		button1 = types.KeyboardButton("Четная")
+
 		button2 = types.KeyboardButton("Нечетная")
+
 		markup.add(button1, button2)
+
 		bot.send_message(message.chat.id, text="Вы вернулись в главное меню", reply_markup=markup)
-	else:
-		bot.send_message(message.chat.id, text="На такую комманду я не запрограммировал..")
+
+		s1end_hi1(message)
 
 
 
+def init_db():
+    conn = sqlite3.connect('my_database.db')
+    cursor = conn.cursor()
+def init_db2():
+	conn = sqlite3.connect('nemmy_database.db')
+	cursor = conn.cursor()
 
 
 
