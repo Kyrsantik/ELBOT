@@ -1,14 +1,17 @@
 from email.message import Message
 from time import process_time_ns
 
+import os
+from dotenv import load_dotenv
 import telebot
 from telebot import types
 import sqlite3
 
+load_dotenv()
 
+bot_token = os.getenv("TELEGRAM_BOT_TOKEN")
 
-
-bot = telebot.TeleBot("7341944123:AAG5BOXZY-0KFMdYuML_m1_gssMZvDwj-88")
+bot = telebot.TeleBot(bot_token)
 
 
 
