@@ -21,7 +21,7 @@ def week_sending(message):
 	if (message.text == "Нечетная"):
 		bot.send_message(message.chat.id, text="Выбирай день")
 		markup = types.ReplyKeyboardMarkup(resize_keyboard=True)
-		btn1 = types.KeyboardButton(".Понедельник")
+		btn1 = types.KeyboardButton(".Понедельник.")
 		btn2 = types.KeyboardButton(".Вторник.")
 		btn3 = types.KeyboardButton(".Среда.")
 		btn4 = types.KeyboardButton(".Четверг.")
@@ -29,7 +29,7 @@ def week_sending(message):
 		back = types.KeyboardButton("Назад")
 		markup.add(btn1, btn2, btn3,btn4,btn5,back)
 		bot.send_message(message.chat.id,text="//////////////////",reply_markup=markup)
-	elif (message.text == "1Понедельник"):
+	elif (message.text == ".Понедельник."):
 		conn = sqlite3.connect('nemmy_database.db')
 		cursor = conn.cursor()
 
